@@ -1,14 +1,15 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { Outlet, Routes, Route } from "react-router-dom";
-import Nav from "./components/Nav/Nav";
+import NavBar from "./components/Nav/Nav";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login/Login";
 
 function App() {
   return (
     <>
-      <Nav />
+      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
