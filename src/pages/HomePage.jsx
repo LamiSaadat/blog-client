@@ -1,11 +1,11 @@
 import React from "react";
-import Feed from "../components/Feed/Feed";
+import PostCard from "../components/PostCard/PostCard";
 
 function HomePage() {
   return (
     <>
       <div>HomePage</div>
-      <Feed />
+      <PostCard />
     </>
   );
 }

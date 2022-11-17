@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -33,7 +33,7 @@ function Login() {
   };
 
   return (
-    <Container className="login-container">
+    <Container className="form-container">
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Email address</Form.Label>
@@ -57,6 +57,10 @@ function Login() {
           Login
         </Button>
       </Form>
+      <Form.Text muted>
+        Don&apos;t have an account? Register{" "}
+        <NavLink to="/register">here</NavLink>!
+      </Form.Text>
     </Container>
   );
 }

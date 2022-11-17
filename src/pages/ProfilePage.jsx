@@ -1,7 +1,8 @@
 import React from "react";
+import UserCard from "../components/UserCard/UserCard";
 
 function ProfilePage() {
-  return <div>ProfilePage</div>;
+  return <UserCard />;
 }
 
 export default ProfilePage;
