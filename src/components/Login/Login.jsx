@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
-import { userLogin } from "../../features/user/userSlice";
+import { login } from "../../features/user/userSlice";
 
 function Login() {
   const dispatch = useDispatch();
@@ -22,10 +22,10 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(userLogin(input))
+    dispatch(login(input))
       .unwrap()
       .then(() => {
-        navigate("/protected");
+        navigate("/account");
       })
       .catch((err) => {
         console.log(err);

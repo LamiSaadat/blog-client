@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import Login from "./components/Login/Login";
 import Logout from "./components/Logout/Logout";
 import Protected from "./components/Protected/Protected";
+import ProtectedRoute from "./routing/ProtectedRoute";
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/protected" element={<Protected />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/account" element={<Protected />} />
+        </Route>
       </Routes>
       <div id="detail">
         <Outlet />

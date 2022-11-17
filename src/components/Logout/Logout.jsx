@@ -13,7 +13,7 @@ function Logout() {
   const logoutHandler = () => {
     dispatch(logout());
     localStorage.removeItem("accesstoken");
-    navigate("/");
+    navigate("/login");
   };
   return (
     <Button variant="primary" type="submit" onClick={logoutHandler}>

@@ -1,11 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserProfile } from "../../features/user/userSlice";
 
 function Protected() {
-  const { loggedIn } = useSelector((state) => state.user);
+  const { userInfo, accesstoken } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (accesstoken) {
+      dispatch(getUserProfile());
+    }
+  }, [accesstoken, dispatch]);
 
   return (
-    <div>{loggedIn ? <div>Protected data</div> : <div>Please log in</div>}</div>
+    <div>
+      <div>{userInfo.email}</div>
+    </div>
   );
 }
 

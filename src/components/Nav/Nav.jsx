@@ -8,13 +8,14 @@ import Logout from "../Logout/Logout";
 
 function NavBar() {
   const { loggedIn } = useSelector((state) => state.user);
+
   return (
     <Navbar bg="light" variant="light">
       <Container>
         <Navbar.Brand href="/">Blog</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/">Feed</Nav.Link>
-          <Nav.Link href="/protected">Protected</Nav.Link>
+          <Nav.Link href="/account">My Profile</Nav.Link>
           {loggedIn ? <Logout /> : <Nav.Link href="/login">Login</Nav.Link>}
         </Nav>
       </Container>
