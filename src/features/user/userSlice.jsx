@@ -11,6 +11,7 @@ const accesstoken = localStorage.getItem("accesstoken")
 const initialState = {
   userInfo: {},
   accesstoken,
+  loggedIn: false,
 };
 
 export const userLogin = createAsyncThunk(
@@ -25,7 +26,7 @@ export const userLogin = createAsyncThunk(
 
       const { data } = await axios.post(url, { email, password }, config);
 
-      localStorage.setItem("accesstoken", data.accesstoken);
+      localStorage.setItem("accesstoken", data.accessToken);
 
       return data;
     } catch (err) {
@@ -40,15 +41,24 @@ export const userLogin = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
+  reducers: {
+    logout: (state) => {
+      state.userInfo = {};
+      state.loggedIn = false;
+    },
+  },
   extraReducers: {
     [userLogin.fulfilled]: (state, { payload }) => {
       state.userInfo = payload;
       state.accesstoken = payload.accesstoken;
+      state.loggedIn = true;
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.error = payload;
     },
   },
 });
+
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

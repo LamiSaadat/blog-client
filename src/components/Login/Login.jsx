@@ -4,13 +4,13 @@ import "./Login.scss";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userLogin } from "../../features/user/userSlice";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.user);
+  // const { userInfo } = useSelector((state) => state.user);
   const [input, setInput] = useState({ email: "", password: "" });
 
   const handleChange = (e) =>
@@ -25,9 +25,7 @@ function Login() {
     dispatch(userLogin(input))
       .unwrap()
       .then(() => {
-        if (userInfo) {
-          navigate("/protected");
-        }
+        navigate("/protected");
       })
       .catch((err) => {
         console.log(err);
@@ -56,7 +54,7 @@ function Login() {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          Login
         </Button>
       </Form>
     </Container>
