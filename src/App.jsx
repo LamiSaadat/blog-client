@@ -7,7 +7,7 @@ import NavBar from "./components/Nav/Nav";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login/Login";
 import Logout from "./components/Logout/Logout";
-import Protected from "./components/Protected/Protected";
+import Account from "./components/Account/Account";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import BlogPostPage from "./pages/BlogPostPage";
 import Register from "./components/Register/Register";
@@ -23,7 +23,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/blogPost" element={<BlogPostPage />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/account" element={<Protected />} />
+          <Route path="/account" element={<Account />} />
         </Route>
       </Routes>
       <div id="detail">

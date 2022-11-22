@@ -87,7 +87,6 @@ export const userSlice = createSlice({
     [getUserProfile.fulfilled]: (state, { payload }) => {
       state.userInfo = payload;
       state.loggedIn = true;
-      console.log(state.userInfo);
     },
     [getUserProfile.rejected]: (state, { payload }) => {
       state.error = payload;

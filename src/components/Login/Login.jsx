@@ -26,6 +26,7 @@ function Login() {
       .unwrap()
       .then(() => {
         navigate("/account");
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
