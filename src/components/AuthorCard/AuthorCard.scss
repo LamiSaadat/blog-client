@@ -1,0 +1,10 @@
+.author-card {
+  width: 15rem;
+  height: 15rem;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
