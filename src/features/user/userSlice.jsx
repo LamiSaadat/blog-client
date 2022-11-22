@@ -12,7 +12,35 @@ const initialState = {
   userInfo: {},
   accesstoken,
   loggedIn: false,
+  // for register
+  success: false,
 };
+
+export const register = createAsyncThunk(
+  "user/register",
+  async ({ firstName, lastName, email, password }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        `${url}/signup`,
+        { firstName, lastName, email, password },
+        config
+      );
+      console.log(data);
+      return data;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const login = createAsyncThunk(
   "user/login",
@@ -76,6 +104,13 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: {
+    [register.fulfilled]: (state) => {
+      state.success = true;
+      console.log(state.success);
+    },
+    [register.rejected]: (state, { payload }) => {
+      state.error = payload;
+    },
     [login.fulfilled]: (state, { payload }) => {
       state.userInfo = payload;
       state.accesstoken = payload.accesstoken;
