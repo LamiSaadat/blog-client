@@ -1,5 +1,22 @@
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "AvenirNext LT Pro", sans-serif;
+}
+
+.app-container {
+  margin: 0 6rem;
+}
+
 .form-container {
-  margin: 15rem auto;
+  margin: 10rem auto;
   border: solid black 2px;
   border-radius: 5px;
   padding: 1rem;

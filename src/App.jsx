@@ -16,16 +16,18 @@ function App() {
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/blogPost" element={<BlogPostPage />} />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/account" element={<Account />} />
-        </Route>
-      </Routes>
+      <main className="app-container">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/blogPost" element={<BlogPostPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/account" element={<Account />} />
+          </Route>
+        </Routes>
+      </main>
       <div id="detail">
         <Outlet />
       </div>
