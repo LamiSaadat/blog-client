@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 
 function ProtectedRoute() {
-  const { accesstoken } = useSelector((state) => state.user);
+  const { loggedIn, accesstoken } = useSelector((state) => state.user);
 
-  if (!accesstoken) {
+  if (!loggedIn && !accesstoken) {
     return (
       <div>
         <h1>Unauthorized</h1>
