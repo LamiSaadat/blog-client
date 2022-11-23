@@ -10,5 +10,5 @@
     "ecmaVersion": "latest"
   },
   "plugins": ["react"],
-  "rules": { "no-param-reassign": 0 }
+  "rules": { "no-param-reassign": 0, "react/forbid-prop-types": 0 }
 }
