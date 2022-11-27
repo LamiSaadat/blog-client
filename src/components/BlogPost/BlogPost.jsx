@@ -18,11 +18,12 @@ function BlogPost() {
           <Card.Title>{item.title}</Card.Title>
           <Card.Text>{item.content}</Card.Text>
           <LikeButton />
+          <span>{item.likes.length}</span>
         </Card.Body>
       </Card>
 
-      <AuthorCard />
-      <PostComments />
+      <AuthorCard author={item.author} />
+      <PostComments comments={item.comments} />
       <CommentForm />
     </>
   );
