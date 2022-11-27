@@ -22,7 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/blogPost" element={<BlogPostPage />} />
+          <Route path="/blogPost/:postId" element={<BlogPostPage />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/account" element={<Account />} />
           </Route>

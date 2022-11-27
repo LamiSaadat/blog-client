@@ -10,7 +10,10 @@ function PostCard({ allPosts }) {
     <Card.Body key={post?.id}>
       <Card.Title>{post?.title}</Card.Title>
       <Card.Text>{post?.content.slice(0, 20)}</Card.Text>
-      <NavLink to="/blogPost">
+      <NavLink
+        to={`/blogPost/${post?.id}`}
+        state={{ from: "all posts", item: post }}
+      >
         <Button variant="primary">View Post</Button>
       </NavLink>
       <LikeButton />
