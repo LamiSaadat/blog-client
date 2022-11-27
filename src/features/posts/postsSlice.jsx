@@ -24,6 +24,32 @@ export const getFeedPosts = createAsyncThunk(
   }
 );
 
+export const createPost = createAsyncThunk(
+  "posts/createPost",
+  async ({ title, content, published }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        `${url}/create`,
+        { title, content, published },
+        config
+      );
+      console.log(data);
+      return data;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -34,6 +60,10 @@ export const postsSlice = createSlice({
     [getFeedPosts.fulfilled]: (state, { payload }) => {
       state.allPosts = payload;
       state.loading = false;
+      console.log(state.allPosts);
+    },
+    [createPost.fulfilled]: (state, { payload }) => {
+      state.allPost.push(payload);
       console.log(state.allPosts);
     },
   },

@@ -14,6 +14,7 @@ function NavBar() {
         <Navbar.Brand href="/">Blog</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/">Feed</Nav.Link>
+          <Nav.Link href="/create">Create</Nav.Link>
           <Nav.Link href="/account">My Profile</Nav.Link>
           {loggedIn && accesstoken ? (
             <Logout />

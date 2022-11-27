@@ -11,6 +11,7 @@ import Account from "./components/Account/Account";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import BlogPostPage from "./pages/BlogPostPage";
 import Register from "./components/Register/Register";
+import CreatePost from "./components/CreatePost/CreatePost";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/blogPost/:postId" element={<BlogPostPage />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/account" element={<Account />} />
+            <Route path="/create" element={<CreatePost />} />
           </Route>
         </Routes>
       </main>
