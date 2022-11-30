@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Button from "react-bootstrap/Button";
+
 import { logout } from "../../features/user/userSlice";
 
 function Logout() {
@@ -16,9 +16,9 @@ function Logout() {
     navigate("/login");
   };
   return (
-    <Button variant="primary" type="submit" onClick={logoutHandler}>
+    <button type="submit" onClick={logoutHandler}>
       Logout
-    </Button>
+    </button>
   );
 }
 

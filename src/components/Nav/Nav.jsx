@@ -1,7 +1,4 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
 import { useSelector } from "react-redux";
 import Logout from "../Logout/Logout";
 
@@ -9,21 +6,17 @@ function NavBar() {
   const { loggedIn, accesstoken } = useSelector((state) => state.user);
 
   return (
-    <Navbar bg="light" variant="light">
-      <Container>
-        <Navbar.Brand href="/">Blog</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="/">Feed</Nav.Link>
-          <Nav.Link href="/create">Create</Nav.Link>
-          <Nav.Link href="/account">My Profile</Nav.Link>
-          {loggedIn && accesstoken ? (
-            <Logout />
-          ) : (
-            <Nav.Link href="/login">Login</Nav.Link>
-          )}
-        </Nav>
-      </Container>
-    </Navbar>
+    <nav>
+      <div>
+        <a href="/">Blog</a>
+        <nav className="me-auto">
+          <a href="/">Feed</a>
+          <a href="/create">Create</a>
+          <a href="/account">My Profile</a>
+          {loggedIn && accesstoken ? <Logout /> : <a href="/login">Login</a>}
+        </nav>
+      </div>
+    </nav>
   );
 }
 

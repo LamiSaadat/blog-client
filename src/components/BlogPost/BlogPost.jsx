@@ -1,5 +1,4 @@
 import React from "react";
-import { Card } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import AuthorCard from "../AuthorCard/AuthorCard";
 import CommentForm from "../CommentForm/CommentForm";
@@ -13,14 +12,14 @@ function BlogPost() {
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <Card.Title>{item.title}</Card.Title>
-          <Card.Text>{item.content}</Card.Text>
+      <div>
+        <div>
+          <p>{item.title}</p>
+          <p>{item.content}</p>
           <LikeButton />
           <span>{item.likes.length}</span>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       <AuthorCard author={item.author} />
       <PostComments comments={item.comments} />

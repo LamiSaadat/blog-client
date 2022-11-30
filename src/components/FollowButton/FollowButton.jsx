@@ -1,12 +1,7 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 
 function FollowButton() {
-  return (
-    <Button variant="primary" type="submit">
-      Follow
-    </Button>
-  );
+  return <button type="submit">Follow</button>;
 }
 
 export default FollowButton;

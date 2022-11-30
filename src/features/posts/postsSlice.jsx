@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const url = "http://localhost:8000/posts";
 
@@ -28,11 +29,16 @@ export const createPost = createAsyncThunk(
   "posts/createPost",
   async ({ title, content, published }, { rejectWithValue }) => {
     try {
+      const { accesstoken } = useSelector((state) => state.user);
+      console.log(accesstoken);
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accesstoken}`,
         },
       };
+
+      console.log("inside slice");
 
       const { data } = await axios.post(
         `${url}/create`,

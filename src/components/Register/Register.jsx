@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../features/user/userSlice";
@@ -34,49 +31,47 @@ function Register() {
   };
 
   return (
-    <Container className="form-container">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <p>First Name</p>
+          <input
             type="text"
             placeholder="First name"
             name="firstName"
             onChange={handleChange}
           />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
+        </div>
+        <div className="mb-3">
+          <p>Last Name</p>
+          <input
             type="text"
             placeholder="Last name"
             name="lastName"
             onChange={handleChange}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
+        </div>
+        <div className="mb-3">
+          <p>Email address</p>
+          <input
             type="email"
             placeholder="Enter email"
             name="email"
             onChange={handleChange}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formGroupPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        </div>
+        <div className="mb-3">
+          <p>Password</p>
+          <input
             type="password"
             placeholder="Password"
             name="password"
             onChange={handleChange}
           />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Register
-        </Button>
-      </Form>
-    </Container>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
 }
 

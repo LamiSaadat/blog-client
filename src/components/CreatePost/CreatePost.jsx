@@ -1,22 +1,25 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import { createPost } from "../../features/posts/postsSlice";
 
+require("react-dom");
+window.React2 = require("react");
+
+console.log(window.React1 === window.React2);
+
 function CreatePost() {
-  const { loggedIn, accesstoken } = useSelector((state) => state.user);
-  console.log(loggedIn);
   // state to store input
   const [input, setInput] = useState({
     title: "",
     content: "",
     publish: false,
   });
+  // const { loggedIn, accesstoken } = useSelector((state) => state.user);
+  // console.log(loggedIn, accesstoken);
   // dispatch input
   const dispatch = useDispatch();
-  const navigate = useNavigate;
+  // const navigate = useNavigate();
 
   // change handler
   const handleChange = (e) => {
@@ -29,30 +32,26 @@ function CreatePost() {
   // submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("clicked at 32");
 
-    if (loggedIn && accesstoken) {
-      dispatch(createPost(input))
-        .unwrap()
-        .then(() => {
-          navigate("/");
-          window.location.reload(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    dispatch(createPost(input))
+      .unwrap()
+      .then(() => console.log("done"))
+      .catch((err) => console.log(err));
+
+    console.log("clicked at 44");
   };
   // drafts handler
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <h3>Title</h3>
-      <Form.Control as="textarea" name="title" onChange={handleChange} />
+      <input type="textarea" name="title" onChange={handleChange} />
       <h3>Content</h3>
-      <Form.Control as="textarea" name="content" onChange={handleChange} />
+      <input type="textarea" name="content" onChange={handleChange} />
       <div>
         {/* change on state */}
-        <Button type="submit">Post</Button>
-        <Form.Check
+        <button type="submit">Post</button>
+        <input
           type="checkbox"
           label="Publish"
           name="publish"
@@ -60,7 +59,7 @@ function CreatePost() {
           onChange={handleChange}
         />
       </div>
-    </Form>
+    </form>
   );
 }
 
