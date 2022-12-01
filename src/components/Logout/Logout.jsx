@@ -13,6 +13,7 @@ function Logout() {
   const logoutHandler = () => {
     dispatch(logout());
     localStorage.removeItem("accesstoken");
+    localStorage.removeItem("loggedIn");
     navigate("/login");
   };
   return (
