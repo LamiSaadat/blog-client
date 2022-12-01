@@ -37,7 +37,7 @@ function Login() {
         </h1>
 
         <div className="form-floating">
-          <h3>Email</h3>
+          <h3 className="h3 mb-3 fw-normal">Email</h3>
           <input
             type="email"
             className="form-control"
@@ -48,7 +48,7 @@ function Login() {
           />
         </div>
         <div className="form-floating">
-          <h3>Password</h3>
+          <h3 className="h3 mb-3 fw-normal">Password</h3>
           <input
             type="password"
             className="form-control"

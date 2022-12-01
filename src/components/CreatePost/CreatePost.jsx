@@ -12,8 +12,7 @@ function CreatePost() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loggedIn, accesstoken } = useSelector((state) => state.user);
-  console.log("logged in:", loggedIn);
+  const { accesstoken } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -37,27 +36,52 @@ function CreatePost() {
         .catch((err) => console.log(err));
     }
   };
-  // drafts handler
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Title</h3>
-      <input type="textarea" name="title" onChange={handleChange} />
-      <h3>Content</h3>
-      <input type="textarea" name="content" onChange={handleChange} />
-      <div>
-        <button type="submit">
-          {input.published ? "Post" : "Save as Draft"}
-        </button>
+    <div style={{ marginTop: "2rem" }}>
+      <h2>New Post</h2>
+      <form onSubmit={handleSubmit} style={{ marginTop: "2rem" }}>
+        <h3 className="h3 mb-3 fw-normal">Title</h3>
         <input
-          type="checkbox"
-          label="published"
-          id="published"
-          name="published"
-          checked={input.published}
+          type="textarea"
+          className="form-control"
+          name="title"
           onChange={handleChange}
+          style={{ height: "4rem" }}
         />
-      </div>
-    </form>
+        <h3 className="h3 mb-3 fw-normal" style={{ marginTop: "1rem" }}>
+          Content
+        </h3>
+        <input
+          type="textarea"
+          className="form-control"
+          name="content"
+          onChange={handleChange}
+          style={{ height: "18.75rem" }}
+        />
+        <div className="formContainer__create-post-controls">
+          <button
+            type="submit"
+            className="w-100 btn btn-lg btn-primary formContainer__button"
+          >
+            {input.published ? "Post" : "Save as Draft"}
+          </button>
+          <div className="formContainer__publish">
+            <label htmlFor="published" className="formContainer__publish">
+              Publish
+              <input
+                type="checkbox"
+                label="published"
+                id="published"
+                name="published"
+                checked={input.published}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 }
 

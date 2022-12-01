@@ -32,4 +32,16 @@ html {
   &__button {
     margin-top: 1.25rem;
   }
+
+  // &__create-post-controls {
+  //   display: flex;
+  // }
+
+  &__publish {
+    font-size: 1.5rem;
+  }
+
+  &__publish input {
+    height: 1.2rem;
+  }
 }
