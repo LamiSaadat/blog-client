@@ -17,12 +17,14 @@ function UserCard() {
   console.log(userInfo);
 
   return (
-    <div>
-      <div>
-        <p>{userInfo?.firstName}</p>
-        <p>Followers {userInfo?.followedBy?.length}</p>
-        <p>Following {userInfo?.following?.length}</p>
-        <p>Posts {userInfo?.posts?.length}</p>
+    <div className="card text-center userCard">
+      <div className="card-body userCard__info">
+        <h5 className="card-title">{userInfo?.firstName}</h5>
+        <div className="userCard__details">
+          <p className="card-text">Followers {userInfo?.followedBy?.length}</p>
+          <p className="card-text">Following {userInfo?.following?.length}</p>
+          <p className="card-text">Posts {userInfo?.posts?.length}</p>
+        </div>
         <FollowButton />
       </div>
     </div>
