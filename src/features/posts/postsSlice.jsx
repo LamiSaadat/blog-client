@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 const url = "http://localhost:8000/posts";
 
@@ -27,25 +26,24 @@ export const getFeedPosts = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   "posts/createPost",
-  async ({ title, content, published }, { rejectWithValue }) => {
+  async ({ title, content, published }, { getState, rejectWithValue }) => {
     try {
-      const { accesstoken } = useSelector((state) => state.user);
-      console.log(accesstoken);
+      const { user } = getState();
+      console.log(user);
+      console.log(user.loggedIn);
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accesstoken}`,
+          Authorization: `Bearer ${user.accesstoken}`,
         },
       };
-
-      console.log("inside slice");
 
       const { data } = await axios.post(
         `${url}/create`,
         { title, content, published },
         config
       );
-      console.log(data);
+
       return data;
     } catch (err) {
       if (!err.response) {
@@ -68,9 +66,12 @@ export const postsSlice = createSlice({
       state.loading = false;
       console.log(state.allPosts);
     },
+    [createPost.pending]: (state) => {
+      state.loading = true;
+    },
     [createPost.fulfilled]: (state, { payload }) => {
-      state.allPost.push(payload);
-      console.log(state.allPosts);
+      state.allPosts.push(payload);
+      state.loading = false;
     },
   },
 });

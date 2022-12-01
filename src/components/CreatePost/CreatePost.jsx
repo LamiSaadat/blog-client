@@ -1,27 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-import { createPost } from "../../features/posts/postsSlice";
-
-require("react-dom");
-window.React2 = require("react");
-
-console.log(window.React1 === window.React2);
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createPost, getFeedPosts } from "../../features/posts/postsSlice";
 
 function CreatePost() {
-  // state to store input
   const [input, setInput] = useState({
     title: "",
     content: "",
-    publish: false,
+    published: false,
   });
-  // const { loggedIn, accesstoken } = useSelector((state) => state.user);
-  // console.log(loggedIn, accesstoken);
-  // dispatch input
-  const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
-  // change handler
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loggedIn, accesstoken } = useSelector((state) => state.user);
+  console.log("logged in:", loggedIn);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setInput((prevInput) => ({
@@ -29,17 +22,20 @@ function CreatePost() {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  // submit handler
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked at 32");
 
-    dispatch(createPost(input))
-      .unwrap()
-      .then(() => console.log("done"))
-      .catch((err) => console.log(err));
-
-    console.log("clicked at 44");
+    if (accesstoken) {
+      dispatch(createPost(input))
+        .unwrap()
+        .then(() => {
+          dispatch(getFeedPosts());
+          navigate("/");
+          window.location.reload(false);
+        })
+        .catch((err) => console.log(err));
+    }
   };
   // drafts handler
   return (
@@ -49,13 +45,15 @@ function CreatePost() {
       <h3>Content</h3>
       <input type="textarea" name="content" onChange={handleChange} />
       <div>
-        {/* change on state */}
-        <button type="submit">Post</button>
+        <button type="submit">
+          {input.published ? "Post" : "Save as Draft"}
+        </button>
         <input
           type="checkbox"
-          label="Publish"
-          name="publish"
-          checked={input.publish}
+          label="published"
+          id="published"
+          name="published"
+          checked={input.published}
           onChange={handleChange}
         />
       </div>
