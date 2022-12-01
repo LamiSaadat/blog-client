@@ -11,7 +11,7 @@ const accesstoken = localStorage.getItem("accesstoken")
 const initialState = {
   userInfo: {},
   accesstoken,
-  loggedIn: false,
+  loggedIn: true,
   // for register
   success: false,
 };
@@ -59,6 +59,7 @@ export const login = createAsyncThunk(
       );
 
       localStorage.setItem("accesstoken", data.accessToken);
+      localStorage.setItem("loggedIn", initialState.loggedIn);
 
       return data;
     } catch (err) {

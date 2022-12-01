@@ -3,9 +3,14 @@ import axios from "axios";
 
 const url = "http://localhost:8000/posts";
 
+const loggedIn = localStorage.getItem("loggedIn")
+  ? localStorage.getItem("loggedIn")
+  : false;
+
 const initialState = {
   allPosts: [],
   loading: false,
+  loggedIn,
 };
 
 export const getFeedPosts = createAsyncThunk(
@@ -71,6 +76,7 @@ export const postsSlice = createSlice({
     },
     [createPost.fulfilled]: (state, { payload }) => {
       state.allPosts.push(payload);
+      state.loggedIn = true;
       state.loading = false;
     },
   },
