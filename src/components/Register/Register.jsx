@@ -31,45 +31,59 @@ function Register() {
   };
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <p>First Name</p>
+    <div className="formContainer">
+      <form onSubmit={handleSubmit} className="formContainer__form">
+        <h1 className="h3 mb-3 fw-normal formContainer__title">Register</h1>
+        <div className="form-floating">
+          <h3>First Name</h3>
           <input
             type="text"
-            placeholder="First name"
+            className="form-control"
+            id="floatingInput"
+            placeholder="First Name"
             name="firstName"
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <p>Last Name</p>
+        <div className="form-floating">
+          <h3>Last Name</h3>
           <input
             type="text"
-            placeholder="Last name"
+            className="form-control"
+            id="floatingInput"
+            placeholder="Last Name"
             name="lastName"
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <p>Email address</p>
+        <div className="form-floating">
+          <h3>Email</h3>
           <input
             type="email"
-            placeholder="Enter email"
+            className="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
             name="email"
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <p>Password</p>
+        <div className="form-floating">
+          <h3>Email</h3>
           <input
-            type="password"
-            placeholder="Password"
-            name="password"
+            type="email"
+            className="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            name="email"
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Register</button>
+        <button
+          type="submit"
+          className="w-100 btn btn-lg btn-primary formContainer__button"
+        >
+          Register
+        </button>
       </form>
     </div>
   );
