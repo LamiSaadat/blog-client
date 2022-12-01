@@ -6,12 +6,12 @@ import FollowButton from "../FollowButton/FollowButton";
 
 function AuthorCard({ author }) {
   return (
-    <div className="author-card">
-      <div className="author-card__body">
-        <p className="author-card__username">
+    <div className="author-card card text-center">
+      <div className="author-card__body card-body">
+        <h4 className="author-card__username card-title">
           {author.firstName} {author.lastName}
-        </p>
-        <p className="author-card__followers">followers</p>
+        </h4>
+        <p className="author-card__followers card-text">followers</p>
         <FollowButton />
       </div>
     </div>
