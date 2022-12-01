@@ -9,17 +9,19 @@ function BlogPost() {
   const location = useLocation();
 
   const { item } = location.state;
+  console.log(item);
 
   return (
     <>
-      <div>
-        <div>
-          <p>{item.title}</p>
-          <p>{item.content}</p>
-          <LikeButton />
-          <span>{item.likes.length}</span>
-        </div>
-      </div>
+      <article className="blog-post" style={{ marginTop: "3rem" }}>
+        <h2 className="blog-post-title mb-1">{item.title}</h2>
+        <p className="blog-post-meta">
+          January 1, 2021 by <a href="/">{item.author.firstName}</a>
+        </p>
+        <LikeButton />
+        <hr />
+        <p>{item.content}</p>
+      </article>
 
       <AuthorCard author={item.author} />
       <PostComments comments={item.comments} />
