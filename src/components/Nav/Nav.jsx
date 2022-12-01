@@ -7,17 +7,6 @@ function NavBar() {
   const { loggedIn, accesstoken } = useSelector((state) => state.user);
 
   return (
-    // <nav>
-    //   <div>
-    //     <a href="/">Blog</a>
-    //     <nav className="me-auto">
-    //       <a href="/">Feed</a>
-    //       <a href="/create">Create</a>
-    //       <a href="/account">My Profile</a>
-    //       {loggedIn && accesstoken ? <Logout /> : <a href="/login">Login</a>}
-    //     </nav>
-    //   </div>
-    // </nav>
     <header className="p-3 text-bg-dark">
       <div className="container">
         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">

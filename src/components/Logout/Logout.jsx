@@ -8,8 +8,6 @@ function Logout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { loggedIn } = useSelector((state) => state.user);
-
   const logoutHandler = () => {
     dispatch(logout());
     localStorage.removeItem("accesstoken");
@@ -17,7 +15,11 @@ function Logout() {
     navigate("/login");
   };
   return (
-    <button type="submit" onClick={logoutHandler}>
+    <button
+      type="submit"
+      onClick={logoutHandler}
+      className="btn btn-outline-light me-2"
+    >
       Logout
     </button>
   );
