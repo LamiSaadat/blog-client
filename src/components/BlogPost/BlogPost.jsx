@@ -12,21 +12,28 @@ function BlogPost() {
   console.log(item);
 
   return (
-    <>
-      <article className="blog-post" style={{ marginTop: "3rem" }}>
-        <h2 className="blog-post-title mb-1">{item.title}</h2>
-        <p className="blog-post-meta">
-          January 1, 2021 by <a href="/">{item.author.firstName}</a>
-        </p>
-        <LikeButton />
-        <hr />
-        <p>{item.content}</p>
-      </article>
+    <div
+      className="row g-5"
+      style={{ justifyContent: "space-between", marginTop: "3rem" }}
+    >
+      <div className="col-md-8" style={{ width: " 75%" }}>
+        <div className="blog-post-container">
+          <article className="blog-post" style={{}}>
+            <h2 className="blog-post-title mb-1">{item.title}</h2>
+            <p className="blog-post-meta">
+              January 1, 2021 by <a href="/">{item.author.firstName}</a>
+            </p>
+            <LikeButton />
+            <hr />
+            <p>{item.content}</p>
+          </article>
+        </div>
+      </div>
 
       <AuthorCard author={item.author} />
       <PostComments comments={item.comments} />
       <CommentForm />
-    </>
+    </div>
   );
 }
 
