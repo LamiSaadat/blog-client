@@ -7,11 +7,12 @@ import NavBar from "./components/Nav/Nav";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login/Login";
 import Logout from "./components/Logout/Logout";
-import Account from "./components/Account/Account";
+// import Account from "./components/Account/Account";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import BlogPostPage from "./pages/BlogPostPage";
 import Register from "./components/Register/Register";
 import CreatePost from "./components/CreatePost/CreatePost";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/blogPost/:postId" element={<BlogPostPage />} />
+          <Route path="/profile/:userId" element={<ProfilePage />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/account" element={<Account />} />
+            <Route path="/account" element={<ProfilePage />} />
             <Route path="/create" element={<CreatePost />} />
           </Route>
         </Routes>

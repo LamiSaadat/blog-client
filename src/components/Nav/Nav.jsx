@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logout from "../Logout/Logout";
 
 function NavBar() {
@@ -22,9 +22,13 @@ function NavBar() {
               </a>
             </li>
             <li>
-              <a href="/account" className="nav-link px-2 text-white">
+              <NavLink
+                to="/account"
+                state={{ from: "navigation" }}
+                className="nav-link px-2 text-white"
+              >
                 Profile
-              </a>
+              </NavLink>
             </li>
           </ul>
 

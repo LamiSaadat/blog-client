@@ -14,6 +14,7 @@ const initialState = {
   loggedIn: true,
   // for register
   success: false,
+  othersInfo: {},
 };
 
 export const register = createAsyncThunk(
@@ -95,6 +96,25 @@ export const getUserProfile = createAsyncThunk(
   }
 );
 
+export const getOthersProfile = createAsyncThunk(
+  "user/getOthersProfile",
+  async (arg, { id, rejectWithValue }) => {
+    // console.log(id);
+    try {
+      const { data } = await axios.get(`${url}/profile/${id}`);
+
+      console.log(data);
+
+      return data;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -125,6 +145,12 @@ export const userSlice = createSlice({
       state.loggedIn = true;
     },
     [getUserProfile.rejected]: (state, { payload }) => {
+      state.error = payload;
+    },
+    [getOthersProfile.fulfilled]: (state, { payload }) => {
+      state.othersInfo = payload;
+    },
+    [getOthersProfile.rejected]: (state, { payload }) => {
       state.error = payload;
     },
   },

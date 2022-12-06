@@ -1,21 +1,8 @@
-import React, { useEffect } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../../features/user/userSlice";
+import React from "react";
+import PropTypes from "prop-types";
 import FollowButton from "../FollowButton/FollowButton";
 
-function UserCard() {
-  const { userInfo, accesstoken } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (accesstoken) {
-      dispatch(getUserProfile());
-    }
-  }, [accesstoken, dispatch]);
-
-  console.log(userInfo);
-
+function UserCard({ userInfo }) {
   return (
     <div className="card text-center userCard">
       <div className="card-body userCard__info">
@@ -25,10 +12,15 @@ function UserCard() {
           <p className="card-text">Following {userInfo?.following?.length}</p>
           <p className="card-text">Posts {userInfo?.posts?.length}</p>
         </div>
+        {/* do not show if user profile is same as logged in user */}
         <FollowButton />
       </div>
     </div>
   );
 }
+
+UserCard.propTypes = {
+  userInfo: PropTypes.object.isRequired,
+};
 
 export default UserCard;
