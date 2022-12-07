@@ -25,7 +25,7 @@ function ProfilePage() {
     return (
       <>
         <UserCard userInfo={location?.state?.item?.author} />
-        {/* <PostCard postsArr={location?.state?.item} /> */}
+        <PostCard postsArr={location?.state?.item?.author?.posts} />
       </>
     );
   }
