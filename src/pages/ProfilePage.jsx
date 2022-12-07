@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import UserCard from "../components/UserCard/UserCard";
+import PostCard from "../components/PostCard/PostCard";
 import { getUserProfile } from "../features/user/userSlice";
 
 function ProfilePage() {
@@ -21,14 +22,53 @@ function ProfilePage() {
   console.log(userInfo);
 
   if (location?.state?.from === "blog post") {
-    return <UserCard userInfo={location.state.item.author} />;
+    return (
+      <>
+        <UserCard userInfo={location?.state?.item?.author} />
+        {/* <PostCard postsArr={location?.state?.item} /> */}
+      </>
+    );
   }
 
   if (location?.state?.from === "navigation") {
-    return <UserCard userInfo={userInfo} />;
+    return (
+      <>
+        <UserCard userInfo={userInfo} />
+        <div className="nav-scroller py-1 mb-2">
+          <nav className="nav d-flex justify-content-evenly">
+            <button type="button" className="btn btn-outline-secondary">
+              Published
+            </button>
+            <button type="button" className="btn btn-outline-secondary">
+              Drafts
+            </button>
+            {/* <a className="p-2 link-secondary" href="/">World</a>
+      <a className="p-2 link-secondary" href="/">U.S.</a> */}
+          </nav>
+        </div>
+        <PostCard postsArr={userInfo?.posts} />
+      </>
+    );
   }
 
-  return <UserCard userInfo={userInfo} />;
+  return (
+    <>
+      <UserCard userInfo={userInfo} />
+      <div className="nav-scroller py-1 mb-2">
+        <nav className="nav d-flex justify-content-evenly">
+          <button type="button" className="btn btn-outline-secondary">
+            Published
+          </button>
+          <button type="button" className="btn btn-outline-secondary">
+            Drafts
+          </button>
+          {/* <a className="p-2 link-secondary" href="/">World</a>
+        <a className="p-2 link-secondary" href="/">U.S.</a> */}
+        </nav>
+      </div>
+      <PostCard postsArr={userInfo?.posts} />
+    </>
+  );
 }
 
 export default ProfilePage;

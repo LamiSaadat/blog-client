@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import PostCard from "../components/PostCard/PostCard";
 import { getFeedPosts } from "../features/posts/postsSlice";
 
 function HomePage() {
-  const { loggedIn } = useSelector((state) => state.user);
   const { allPosts, loading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location);
 
-  console.log("logged in:", loggedIn);
   useEffect(() => {
     dispatch(getFeedPosts());
   }, [dispatch]);
@@ -16,7 +17,8 @@ function HomePage() {
   if (loading) {
     return <div>Loading...</div>;
   }
-  return <PostCard allPosts={allPosts} />;
+
+  return <PostCard postsArr={allPosts} />;
 }
 
 export default HomePage;

@@ -8,13 +8,19 @@ const accesstoken = localStorage.getItem("accesstoken")
   ? localStorage.getItem("accesstoken")
   : null;
 
+// initialize logged in user info from local storage
+const userInfo = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : {};
+
 const initialState = {
-  userInfo: {},
+  userInfo,
   accesstoken,
   loggedIn: true,
   // for register
   success: false,
   othersInfo: {},
+  loading: false,
 };
 
 export const register = createAsyncThunk(
@@ -32,7 +38,7 @@ export const register = createAsyncThunk(
         { firstName, lastName, email, password },
         config
       );
-      console.log(data);
+
       return data;
     } catch (err) {
       if (!err.response) {
@@ -86,6 +92,9 @@ export const getUserProfile = createAsyncThunk(
       };
       const { data } = await axios.get(`${url}/account`, config);
 
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      console.log(data);
+
       return data;
     } catch (err) {
       if (!err.response) {
@@ -127,31 +136,45 @@ export const userSlice = createSlice({
   extraReducers: {
     [register.fulfilled]: (state) => {
       state.success = true;
+      state.loading = false;
       console.log(state.success);
     },
     [register.rejected]: (state, { payload }) => {
       state.error = payload;
+      state.loading = false;
+    },
+    [login.pending]: (state) => {
+      state.loading = true;
     },
     [login.fulfilled]: (state, { payload }) => {
       state.userInfo = payload;
       state.accesstoken = payload.accesstoken;
       state.loggedIn = true;
+      state.loading = false;
     },
     [login.rejected]: (state, { payload }) => {
       state.error = payload;
+      state.loading = false;
+    },
+    [getUserProfile.pending]: (state) => {
+      state.loading = true;
     },
     [getUserProfile.fulfilled]: (state, { payload }) => {
       state.userInfo = payload;
       state.loggedIn = true;
+      state.loading = false;
     },
     [getUserProfile.rejected]: (state, { payload }) => {
       state.error = payload;
+      state.loading = false;
     },
     [getOthersProfile.fulfilled]: (state, { payload }) => {
       state.othersInfo = payload;
+      state.loading = false;
     },
     [getOthersProfile.rejected]: (state, { payload }) => {
       state.error = payload;
+      state.loading = false;
     },
   },
 });

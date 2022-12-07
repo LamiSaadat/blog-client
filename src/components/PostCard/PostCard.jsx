@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 // import LikeButton from "../LikeButton/LikeButton";
 
-function PostCard({ allPosts }) {
-  const posts = allPosts.map((post) => (
+function PostCard({ postsArr }) {
+  const posts = postsArr.map((post) => (
     <div key={post?.id} className="col">
       <div className="card shadow-sm">
         <h2 style={{ padding: "1rem" }}>{post?.title}</h2>
         <div className="card-body">
-          <p className="card-text">{post?.content.slice(0, 20)}</p>
+          <p className="card-text">{post?.content?.slice(0, 20)}</p>
           <div className="d-flex justify-content-between align-items-center">
             <div className="btn-group">
               <NavLink
                 to={`/blogPost/${post?.id}`}
-                state={{ from: "all posts", item: post }}
+                state={{ from: "post card", item: post }}
               >
                 <button
                   type="button"
@@ -36,7 +36,6 @@ function PostCard({ allPosts }) {
 
   return (
     <div
-      key={posts?.id}
       className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
       style={{ marginTop: "1rem" }}
     >
@@ -46,7 +45,7 @@ function PostCard({ allPosts }) {
 }
 
 PostCard.propTypes = {
-  allPosts: PropTypes.array.isRequired,
+  postsArr: PropTypes.array.isRequired,
 };
 
 export default PostCard;
