@@ -22,10 +22,16 @@ function ProfilePage() {
   console.log(userInfo);
 
   if (location?.state?.from === "blog post") {
+    const authorsPosts = location?.state?.item?.author?.posts;
+    const publishedPosts = authorsPosts.filter(
+      (post) => post.published === true
+    );
+
     return (
       <>
         <UserCard userInfo={location?.state?.item?.author} />
-        <PostCard postsArr={location?.state?.item?.author?.posts} />
+
+        <PostCard postsArr={publishedPosts} />
       </>
     );
   }

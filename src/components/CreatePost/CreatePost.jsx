@@ -30,7 +30,7 @@ function CreatePost() {
         .unwrap()
         .then(() => {
           dispatch(getFeedPosts());
-          navigate("/");
+          navigate("/account");
           window.location.reload(false);
         })
         .catch((err) => console.log(err));
