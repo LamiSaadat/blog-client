@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
@@ -7,6 +7,9 @@ import PostCard from "../components/PostCard/PostCard";
 import { getUserProfile } from "../features/user/userSlice";
 
 function ProfilePage() {
+  const [showPublished, setShowPublished] = useState(false);
+  const [showDrafts, setShowDrafts] = useState(false);
+
   const { userInfo, accesstoken } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -16,10 +19,17 @@ function ProfilePage() {
   useEffect(() => {
     if (accesstoken) {
       dispatch(getUserProfile());
+      setShowPublished(true);
     }
   }, [accesstoken, dispatch]);
 
   console.log(userInfo);
+
+  const usersPosts = userInfo?.posts;
+  const usersPublishedPosts = usersPosts.filter(
+    (post) => post.published === true
+  );
+  const usersDrafts = usersPosts.filter((post) => post.published === false);
 
   if (location?.state?.from === "blog post") {
     const authorsPosts = location?.state?.item?.author?.posts;
@@ -30,7 +40,6 @@ function ProfilePage() {
     return (
       <>
         <UserCard userInfo={location?.state?.item?.author} />
-
         <PostCard postsArr={publishedPosts} />
       </>
     );
@@ -42,17 +51,30 @@ function ProfilePage() {
         <UserCard userInfo={userInfo} />
         <div className="nav-scroller py-1 mb-2">
           <nav className="nav d-flex justify-content-evenly">
-            <button type="button" className="btn btn-outline-secondary">
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={() => {
+                setShowPublished(true);
+                setShowDrafts(false);
+              }}
+            >
               Published
             </button>
-            <button type="button" className="btn btn-outline-secondary">
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={() => {
+                setShowDrafts(true);
+                setShowPublished(false);
+              }}
+            >
               Drafts
             </button>
-            {/* <a className="p-2 link-secondary" href="/">World</a>
-      <a className="p-2 link-secondary" href="/">U.S.</a> */}
           </nav>
         </div>
-        <PostCard postsArr={userInfo?.posts} />
+        {showPublished && <PostCard postsArr={usersPublishedPosts} />}
+        {showDrafts && <PostCard postsArr={usersDrafts} />}
       </>
     );
   }
@@ -62,17 +84,30 @@ function ProfilePage() {
       <UserCard userInfo={userInfo} />
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-evenly">
-          <button type="button" className="btn btn-outline-secondary">
+          <button
+            type="button"
+            className="btn btn-outline-secondary"
+            onClick={() => {
+              setShowPublished(true);
+              setShowDrafts(false);
+            }}
+          >
             Published
           </button>
-          <button type="button" className="btn btn-outline-secondary">
+          <button
+            type="button"
+            className="btn btn-outline-secondary"
+            onClick={() => {
+              setShowDrafts(true);
+              setShowPublished(false);
+            }}
+          >
             Drafts
           </button>
-          {/* <a className="p-2 link-secondary" href="/">World</a>
-        <a className="p-2 link-secondary" href="/">U.S.</a> */}
         </nav>
       </div>
-      <PostCard postsArr={userInfo?.posts} />
+      {showPublished && <PostCard postsArr={usersPublishedPosts} />}
+      {showDrafts && <PostCard postsArr={usersDrafts} />}
     </>
   );
 }
