@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 // import LikeButton from "../LikeButton/LikeButton";
 
 function PostCard({ postsArr }) {
+  console.log(postsArr);
   const posts = postsArr.map((post) => (
     <div key={post?.id} className="col">
       <div className="card shadow-sm">
@@ -12,10 +13,7 @@ function PostCard({ postsArr }) {
           <p className="card-text">{post?.content?.slice(0, 20)}</p>
           <div className="d-flex justify-content-between align-items-center">
             <div className="btn-group">
-              <NavLink
-                to={`/blogPost/${post?.id}`}
-                state={{ from: "post card", item: post }}
-              >
+              <NavLink to={`/blogPost/${post?.id}`}>
                 <button
                   type="button"
                   className="btn btn-sm btn-outline-secondary"

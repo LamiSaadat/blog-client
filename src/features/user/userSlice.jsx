@@ -107,7 +107,7 @@ export const getUserProfile = createAsyncThunk(
 
 export const getOthersProfile = createAsyncThunk(
   "user/getOthersProfile",
-  async (arg, { id, rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     // console.log(id);
     try {
       const { data } = await axios.get(`${url}/profile/${id}`);

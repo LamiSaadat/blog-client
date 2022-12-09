@@ -11,6 +11,7 @@ const initialState = {
   allPosts: [],
   loading: false,
   loggedIn,
+  singlePost: {},
 };
 
 export const getFeedPosts = createAsyncThunk(
@@ -59,6 +60,23 @@ export const createPost = createAsyncThunk(
   }
 );
 
+export const getSinglePost = createAsyncThunk(
+  "posts/getSinglePost",
+  async (id, { rejectWithValue }) => {
+    console.log(id);
+    try {
+      const { data } = await axios.get(`${url}/${id}`);
+      console.log(data);
+      return data;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -78,6 +96,13 @@ export const postsSlice = createSlice({
       state.allPosts.push(payload);
       state.loggedIn = true;
       state.loading = false;
+    },
+    [getSinglePost.pending]: (state) => {
+      state.loading = true;
+    },
+    [getSinglePost.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.singlePost = payload;
     },
   },
 });
