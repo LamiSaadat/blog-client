@@ -38,7 +38,7 @@ function BlogPost() {
                 {singlePost?.author?.firstName}
               </NavLink>
             </p>
-            <LikeButton postId={Number(postId)} />
+            <LikeButton post={singlePost} />
             <hr />
             <p>{singlePost?.content}</p>
           </article>

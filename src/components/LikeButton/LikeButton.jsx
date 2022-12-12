@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
 import { likePost } from "../../features/posts/postsSlice";
 
-function LikeButton({ postId }) {
+function LikeButton({ post }) {
   const [clicked, setClicked] = useState(false);
+  const postId = Number(post.id);
   const [data, setData] = useState({ userId: "", postId: "", like: clicked });
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -28,7 +29,23 @@ function LikeButton({ postId }) {
         console.log(err);
       });
     }
+
+    // else if clicked is false
+    // dispatch to dislike endpoint
   }, [dispatch]);
+
+  // check if the post has a like from the logged in user
+  // if yes, set clicked to true, hence returning filled heart
+
+  const liker = post.likes.find((like) => like.userId === userInfo.id);
+  console.log(liker);
+  console.log(liker.userId);
+
+  useEffect(() => {
+    if (liker.userId === userInfo.id) {
+      setClicked(true);
+    }
+  }, [liker]);
 
   return (
     <button
@@ -42,7 +59,7 @@ function LikeButton({ postId }) {
 }
 
 LikeButton.propTypes = {
-  postId: PropTypes.number.isRequired,
+  post: PropTypes.object.isRequired,
 };
 
 export default LikeButton;
