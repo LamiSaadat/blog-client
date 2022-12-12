@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function PostComments({ comments }) {
-  const comment = comments.map((com) => (
+  const comment = comments?.comments?.map((com) => (
     <div key={com?.id}>
       <p>{com?.content}</p>
     </div>
@@ -16,7 +16,7 @@ function PostComments({ comments }) {
 }
 
 PostComments.propTypes = {
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.object.isRequired,
 };
 
 export default PostComments;

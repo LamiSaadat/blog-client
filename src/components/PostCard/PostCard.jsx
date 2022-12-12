@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-// import LikeButton from "../LikeButton/LikeButton";
 
 function PostCard({ postsArr }) {
   console.log(postsArr);
@@ -21,9 +20,6 @@ function PostCard({ postsArr }) {
                   View Post
                 </button>
               </NavLink>
-              {/* <button type="button" className="btn btn-sm btn-outline-secondary">
-              Edit
-            </button> */}
             </div>
             <small className="text-muted">9 mins</small>
           </div>

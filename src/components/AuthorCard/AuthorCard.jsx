@@ -9,7 +9,7 @@ function AuthorCard({ author }) {
     <div className="author-card card text-center">
       <div className="author-card__body card-body">
         <h4 className="author-card__username card-title">
-          {author.firstName} {author.lastName}
+          {author?.author?.firstName} {author?.author?.lastName}
         </h4>
         <p className="author-card__followers card-text">followers</p>
         <FollowButton />

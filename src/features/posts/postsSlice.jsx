@@ -12,6 +12,7 @@ const initialState = {
   loading: false,
   loggedIn,
   singlePost: {},
+  like: {},
 };
 
 export const getFeedPosts = createAsyncThunk(
@@ -35,8 +36,7 @@ export const createPost = createAsyncThunk(
   async ({ title, content, published }, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
-      console.log(user);
-      console.log(user.loggedIn);
+
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -63,10 +63,67 @@ export const createPost = createAsyncThunk(
 export const getSinglePost = createAsyncThunk(
   "posts/getSinglePost",
   async (id, { rejectWithValue }) => {
-    console.log(id);
     try {
       const { data } = await axios.get(`${url}/${id}`);
+
+      return data;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async ({ userId, postId, like }, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accesstoken}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `${url}/${postId}/like`,
+        { userId, postId, like },
+        config
+      );
       console.log(data);
+      return data;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const unlikePost = createAsyncThunk(
+  "posts/likePost",
+  async ({ userId, postId }, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accesstoken}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `${url}/${postId}/unlike`,
+        { userId, postId },
+        config
+      );
+
       return data;
     } catch (err) {
       if (!err.response) {
@@ -103,6 +160,21 @@ export const postsSlice = createSlice({
     [getSinglePost.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.singlePost = payload;
+    },
+    [likePost.pending]: (state) => {
+      state.loading = true;
+    },
+    [likePost.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.singlePost.likes.push(payload);
+      state.userInfo.Like.push(payload);
+    },
+    [unlikePost.pending]: (state) => {
+      state.loading = true;
+    },
+    [unlikePost.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.like = payload;
     },
   },
 });

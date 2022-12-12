@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { getSinglePost } from "../../features/posts/postsSlice";
-import AuthorCard from "../AuthorCard/AuthorCard";
 import CommentForm from "../CommentForm/CommentForm";
 import LikeButton from "../LikeButton/LikeButton";
+import AuthorCard from "../AuthorCard/AuthorCard";
 import PostComments from "../PostComments/PostComments";
 
 function BlogPost() {
@@ -17,6 +17,8 @@ function BlogPost() {
       console.log(err);
     });
   }, [dispatch, postId]);
+
+  console.log(singlePost);
 
   return (
     <div
@@ -36,15 +38,15 @@ function BlogPost() {
                 {singlePost?.author?.firstName}
               </NavLink>
             </p>
-            <LikeButton />
+            <LikeButton postId={Number(postId)} />
             <hr />
             <p>{singlePost?.content}</p>
           </article>
         </div>
       </div>
 
-      <AuthorCard author={singlePost?.author} />
-      <PostComments comments={singlePost?.comments} />
+      <AuthorCard author={singlePost} />
+      <PostComments comments={singlePost} />
       <CommentForm />
     </div>
   );
